@@ -1,25 +1,35 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const [inputValue, setInputValue] = useState('');
+    const [isCapicua, setIsCapicua] = useState(null);
+
+    const handleInputChange = (event) => {
+        const value = event.target.value;
+        setInputValue(value);
+    };
+
+    const checkCapicua = () => {
+        const reversedValue = inputValue.split('').reverse().join('');
+        setIsCapicua(inputValue === reversedValue);
+    };
+
+    return (
+        <div className="App">
+            <h1>Verificar Capicua</h1>
+            <input
+                type="text"
+                placeholder="Enter text or numbers"
+                value={inputValue}
+                onChange={handleInputChange}
+            />
+            <button onClick={checkCapicua}>Click</button>
+            {isCapicua !== null && (
+                <h2>{isCapicua ? 'Es capicúa' : 'No es capicúa'}</h2>
+            )}
+        </div>
+    );
 }
 
 export default App;
